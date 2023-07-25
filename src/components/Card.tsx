@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement, ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import icon from "../assets/group.png";
 
 export interface ICardProps {
@@ -11,16 +11,16 @@ export interface ICardProps {
 export function Card({ title, desc, children, customeStyle }: ICardProps) {
   return (
     <div
-      className='flex flex-col justify-start items-start rounded-lg shadow-lg p-8 space-y-8'
+      className="flex flex-col justify-start items-start rounded-lg shadow-lg p-8 space-y-8"
       style={{ width: 390, ...customeStyle }}
     >
-      <img src={icon} key='icon' />
-      <div className='text-start'>
-        <h1 key='heading' className='text-xl font-bold'>
+      <img src={icon} key="icon" />
+      <div className="text-start">
+        <h1 key="heading" className="text-xl font-bold">
           {title}
         </h1>
         {desc && (
-          <p key='desc' className='text-slate-400'>
+          <p key="desc" className="text-slate-400">
             {desc}
           </p>
         )}

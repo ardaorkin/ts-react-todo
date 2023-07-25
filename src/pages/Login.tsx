@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
-import icon from "../assets/group.png";
 import { IRequestData } from "../types";
 import { Card } from "../components/Card";
 
@@ -26,17 +25,17 @@ export function Login({ onLogin }: ILoginProps) {
 
   return (
     <Card
-      title='Welcome back!'
-      desc='Login to continue'
+      title="Welcome back!"
+      desc="Login to continue"
       customeStyle={{ height: 471 }}
     >
       {fields.map((fieldProps) => (
         <Input key={fieldProps.name} {...fieldProps} onChange={handleChange} />
       ))}
-      <a className='underline text-sm' key='link' href='/signup'>
+      <a className="underline text-sm" key="link" href="/signup">
         Don't have an account? Sign up.
       </a>
-      <Button key='button' text='Login' onClick={() => onLogin(requestData)} />
+      <Button key="button" text="Login" onClick={() => onLogin(requestData)} />
     </Card>
   );
 }
