@@ -7,7 +7,7 @@ import {
   completeTodo,
   deleteTodo,
   getTodos,
-  unCompleteTodo,
+  inCompleteTodo,
 } from "../api";
 
 export function Todo() {
@@ -51,10 +51,10 @@ export function Todo() {
     } = event;
     const todos = todoList;
     if (!checked) {
-      unCompleteTodo(+id)
+      inCompleteTodo(id)
         .then((updatedTodo) => {
           const updatedTodos = (todos as todo[]).reduce((prev, todo): any => {
-            if (todo.id === updatedTodo.id) {
+            if (todo._id === updatedTodo._id) {
               return [...prev, updatedTodo];
             }
             return [...prev, todo];
@@ -63,10 +63,10 @@ export function Todo() {
         })
         .catch(console.error);
     } else {
-      completeTodo(+id)
+      completeTodo(id)
         .then((updatedTodo) => {
           const updatedTodos = (todos as todo[]).reduce((prev, todo): any => {
-            if (todo.id === updatedTodo.id) {
+            if (todo._id === updatedTodo._id) {
               return [...prev, updatedTodo];
             }
             return [...prev, todo];
@@ -78,9 +78,9 @@ export function Todo() {
   };
 
   const handleDeleteTodo = (id: string) => {
-    deleteTodo(+id)
-      .then(() => {
-        setTodoList((prev) => prev.filter((todo) => todo.id !== +id));
+    deleteTodo(id)
+      .then((remainedTodos) => {
+        setTodoList(remainedTodos);
       })
       .catch(console.error);
   };
@@ -100,11 +100,11 @@ export function Todo() {
               return todo;
           }
         })
-        .map(({ title, completed, id }: todo, idx) => (
+        .map(({ title, completed, _id }: todo, idx) => (
           <div className="flex items-center w-full" key={`todo-${idx}`}>
             <div className="space-x-2 flex items-center w-full">
               <Input
-                id={id?.toString()}
+                id={_id?.toString()}
                 type="checkbox"
                 checked={completed}
                 style={{ width: 18, height: 18, cursor: "pointer" }}
@@ -118,7 +118,7 @@ export function Todo() {
               </label>
             </div>
             <button
-              onClick={() => handleDeleteTodo(id?.toString())}
+              onClick={() => handleDeleteTodo(_id?.toString())}
               className="order-last text-slate-400 text-xl"
             >
               x

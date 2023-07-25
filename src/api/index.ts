@@ -1,6 +1,8 @@
 import { IRequestData, todo } from "../types";
 
-const url = "http://3.86.164.220";
+const url = import.meta.env.DEV
+  ? "http://localhost:3000"
+  : "http://3.86.164.220";
 
 export const signup = async (data: IRequestData): Promise<any> => {
   try {
@@ -67,11 +69,13 @@ export const addTodo = async (title: string): Promise<todo | any> => {
   }
 };
 
-export const completeTodo = async (id: number): Promise<todo | any> => {
+export const completeTodo = async (id: string): Promise<todo | any> => {
   try {
-    const response = await fetch(url + `/todos/${id}/completed`, {
-      method: "PATCH",
-      credentials: "include",
+    const response = await fetch(url + `/todos/${id}/complete`, {
+      method: "PUT",
+      headers: {
+        Authorization: localStorage.getItem("access_token") || "",
+      },
     });
     const result = await response.json();
     return result;
@@ -80,11 +84,13 @@ export const completeTodo = async (id: number): Promise<todo | any> => {
   }
 };
 
-export const unCompleteTodo = async (id: number): Promise<todo | any> => {
+export const inCompleteTodo = async (id: string): Promise<todo | any> => {
   try {
-    const response = await fetch(url + `/todos/${id}/uncompleted`, {
-      method: "PATCH",
-      credentials: "include",
+    const response = await fetch(url + `/todos/${id}/incomplete`, {
+      method: "PUT",
+      headers: {
+        Authorization: localStorage.getItem("access_token") || "",
+      },
     });
     const result = await response.json();
     return result;
@@ -93,14 +99,17 @@ export const unCompleteTodo = async (id: number): Promise<todo | any> => {
   }
 };
 
-export const deleteTodo = async (id: number) => {
+export const deleteTodo = async (id: string) => {
   try {
-    const response = await fetch(url + `/todos/${id}`, {
+    await fetch(url + `/todos/${id}`, {
       method: "DELETE",
-      credentials: "include",
+      headers: {
+        Authorization: localStorage.getItem("access_token") || "",
+      },
     });
-    const result = await response.json();
-    return result;
+
+    const remainedTodos = await getTodos();
+    return remainedTodos;
   } catch (error) {
     return error;
   }

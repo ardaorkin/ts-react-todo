@@ -5,7 +5,7 @@ export interface IRequestData {
 }
 
 export type todo = {
-  id: number;
+  _id: number;
   title: string;
   completed: boolean;
 };
