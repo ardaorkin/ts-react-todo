@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { IRequestData } from "../types";
@@ -32,9 +33,10 @@ export function Login({ onLogin }: ILoginProps) {
       {fields.map((fieldProps) => (
         <Input key={fieldProps.name} {...fieldProps} onChange={handleChange} />
       ))}
-      <a className="underline text-sm" key="link" href="/signup">
+      <Link className="underline text-sm" key="signup-link" to="/signup">
         Don't have an account? Sign up.
-      </a>
+      </Link>
+      <a className="underline text-sm" key="link" href="/signup"></a>
       <Button key="button" text="Login" onClick={() => onLogin(requestData)} />
     </Card>
   );

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { Todo } from "./pages/Todo";
 import { login, signup } from "./api";
+import "./App.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
-    if (localStorage.getItem("loggedin")) {
+    if (localStorage.getItem("access_token")) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -17,7 +18,6 @@ function App() {
   const handleSignup = (data: any) =>
     signup(data)
       .then((data: any) => {
-        localStorage.setItem("loggedin", "true");
         localStorage.setItem("access_token", data.access_token);
         setIsLoggedIn(true);
       })
@@ -26,15 +26,13 @@ function App() {
   const handleLogin = (data: any) =>
     login(data)
       .then((data: any) => {
-        localStorage.setItem("loggedin", "true");
         localStorage.setItem("access_token", data.access_token);
         setIsLoggedIn(true);
       })
       .catch(console.error);
 
   const handleLogout = () => {
-    document.cookie = "token=";
-    localStorage.removeItem("loggedin");
+    localStorage.removeItem("access_token");
     setIsLoggedIn(false);
   };
 
@@ -48,14 +46,13 @@ function App() {
       </div>
     );
 
-  switch (window.location.pathname) {
-    case "/login":
-      return <Login onLogin={handleLogin} />;
-    case "/signup":
-      return <Signup onSignup={handleSignup} />;
-    default:
-      return <Signup onSignup={handleSignup} />;
-  }
+  return (
+    <Routes>
+      <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
+      <Route path="/login" element={<Login onLogin={handleLogin} />} />
+      <Route path="/" element={<Signup onSignup={handleSignup} />}></Route>
+    </Routes>
+  );
 }
 
 export default App;
