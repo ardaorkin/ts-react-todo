@@ -2,7 +2,7 @@ import { IRequestData, todo } from "../types";
 
 const url = import.meta.env.DEV
   ? "http://localhost:3000"
-  : "http://3.86.164.220";
+  : "https://3.86.164.220.nip.io";
 
 export const signup = async (data: IRequestData): Promise<any> => {
   try {
