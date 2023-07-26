@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, redirect } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { Todo } from "./pages/Todo";
@@ -20,6 +20,7 @@ function App() {
       .then((data: any) => {
         localStorage.setItem("access_token", data.access_token);
         setIsLoggedIn(true);
+        window.location.href = window.location.origin + "/todo";
       })
       .catch(console.error);
 
@@ -28,12 +29,14 @@ function App() {
       .then((data: any) => {
         localStorage.setItem("access_token", data.access_token);
         setIsLoggedIn(true);
+        window.location.href = window.location.origin + "/todo";
       })
       .catch(console.error);
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     setIsLoggedIn(false);
+    window.location.href = window.location.origin + "/signup";
   };
 
   if (isLoggedIn)

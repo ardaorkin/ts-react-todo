@@ -6,7 +6,7 @@ import { IRequestData } from "../types";
 import { Card } from "../components/Card";
 
 const fields = [
-  { name: "email", placeholder: "Email", type: "email" },
+  { name: "email", placeholder: "Username or email" },
   { name: "password", placeholder: "Password", type: "password" },
 ];
 
@@ -21,7 +21,12 @@ export function Login({ onLogin }: ILoginProps) {
     const {
       target: { name, value },
     } = event;
-    setRequestData({ ...requestData, [name]: value });
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    const isEmail = emailRegex.test(name);
+    const relatedKey = isEmail ? "email" : "name";
+    console.log(relatedKey);
+    setRequestData({ ...requestData, [relatedKey]: value });
   };
 
   return (

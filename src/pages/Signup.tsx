@@ -30,7 +30,7 @@ export function Signup({ onSignup }: ISignupProps) {
     <Card
       title="Welcome!"
       desc="Sign up to start using Simpledo today."
-      customeStyle={{ height: 530 }}
+      customeStyle={{ height: 600 }}
     >
       {fields.map((fieldProps) => (
         <Input key={fieldProps.name} {...fieldProps} onChange={handleChange} />
