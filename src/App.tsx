@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, redirect } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { Todo } from "./pages/Todo";
