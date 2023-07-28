@@ -86,7 +86,7 @@ export function Todo() {
   };
 
   return (
-    <Card title="Todo List" customeStyle={{ minHeight: 437 }}>
+    <Card title="Todo List" customStyle={{ minHeight: 437 }}>
       <Input placeholder="Add a new todo" onChange={handleNewTodo} />
 
       {todoList

@@ -33,7 +33,7 @@ export function Login({ onLogin }: ILoginProps) {
     <Card
       title="Welcome back!"
       desc="Login to continue"
-      customeStyle={{ height: 471 }}
+      customStyle={{ minHeight: 471 }}
     >
       {fields.map((fieldProps) => (
         <Input key={fieldProps.name} {...fieldProps} onChange={handleChange} />

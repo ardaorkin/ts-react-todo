@@ -5,14 +5,14 @@ export interface ICardProps {
   title?: string;
   desc?: string;
   children?: ReactNode;
-  customeStyle?: CSSProperties;
+  customStyle?: CSSProperties;
 }
 
-export function Card({ title, desc, children, customeStyle }: ICardProps) {
+export function Card({ title, desc, children, customStyle }: ICardProps) {
   return (
     <div
       className="flex flex-col justify-start items-start rounded-lg shadow-lg p-8 space-y-8"
-      style={{ width: 390, ...customeStyle }}
+      style={{ width: 390, ...customStyle }}
     >
       <img src={icon} key="icon" />
       <div className="text-start">
